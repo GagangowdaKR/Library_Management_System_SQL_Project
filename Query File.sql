@@ -152,16 +152,40 @@ limit 3;
 
 
 -- 17. List members who have borrowed books from more than one category.
-select u.user_id, u.name, count(*) as TotalCategory
+select u.user_id, u.name, count(distinct b.category_id) as Total_Category
 from user u
-join book_issues bi 
-on u.user_id = bi.user_id
+join book_issues bi
+on bi.user_id = u.user_id
 join book b
 on b.book_id = bi.book_id
-join category c
-on b.category_id = c.category_id
-group by bi.user_id, c.category_id 
-having count(*) > 1;
+group by u.user_id 
+having count(distinct b.category_id) > 1;
+
+
+-- 18. Find books that were borrowed and returned within 7 days.
+select b.book_id, b.title, bi.issue_date, bi.return_date
+from book b
+join book_issues bi
+on b.book_id = bi.book_id
+where bi.return_date - bi.issue_date < 7;
+
+
+-- 19. Display books that have never been borrowed.
+select b.book_id, b.title
+from book b 
+where book_id not in (
+	select book_id from book_issues
+);
+
+
+-- 20. List each member’s most recently borrowed book.
+-- select bi.user_id, u.name, b.book_id, b.title, bi.issue_date
+-- from user u
+-- join book_issues bi
+-- on u.user_id = bi.user_id 
+-- group by u.user_id
+-- order by issue_date 
+-- limit 1;
 
 select * from user;
 select * from book;
