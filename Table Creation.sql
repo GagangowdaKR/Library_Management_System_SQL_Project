@@ -37,4 +37,3 @@ CREATE TABLE book_issues(
     FOREIGN KEY (book_id) REFERENCES book(book_id),
 	FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
-    

@@ -61,6 +61,8 @@ INSERT INTO book_issues (book_id, user_id, issue_date, return_date) VALUES
 (9, 9, '2025-07-09', '2025-07-26'),
 (10, 1, '2025-07-10', '2025-07-27');
 
+-- *********************************************************** --
+
 insert into book_issues (book_id, user_id, issue_date, return_date) VALUES (2, 2, '2025-07-10', null);
 update book_issues set return_date = null where issue_id = 7;
 
@@ -77,6 +79,13 @@ insert into book_issues (book_id, user_id, issue_date, return_date) VALUES
 (3, 2, '2025-07-02', '2025-07-15'),
 (8, 2, '2025-07-02', '2025-07-15');
 
+update book_issues set issue_date = '2025-08-05' where issue_id = 11;
+update book_issues set return_date = '2024-04-11' where issue_id = 9;
+update book_issues set issue_date = '2025-07-19' where issue_id = 5;
+
+INSERT INTO book (title, author_id, category_id) VALUES ("The Boys", 5, 9);
+
+-- *********************************************************** --
 
 show tables;
 
